@@ -1,0 +1,9 @@
+[ 
+  {
+    "Name": "kimi",
+    "StatementBlock": "$Env:ANTHROPIC_BASE_URL=\"https://api.moonshot.cn/anthropic\"
+$Env:ANTHROPIC_AUTH_TOKEN=\"sk-kimi-jET3rEO1wUJtM1kkbooZl8Yn0t4nCZB2EuUU6eHGcaP4oBgqDmawc07eXZw5gSRN\"
+$Env:ANTHROPIC_MODEL = \"kimi-for-coding\"
+$Env:ANTHROPIC_DEFAULT_SONNET_MODEL = \"kimi-for-coding\""
+  }
+]

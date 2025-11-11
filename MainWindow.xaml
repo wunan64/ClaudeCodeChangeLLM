@@ -1,0 +1,80 @@
+<Window x:Class="LLMConfigManager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Claude code换模型管理器 by风信子木南 https://space.bilibili.com/323413250" Height="600" Width="800">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Column 0: Profile List and Management -->
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Content="配置列表" FontWeight="Bold"/>
+            <ListBox Grid.Row="1" Name="ProfileListBox" Margin="0,5,5,5"/>
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Name="NewButton" Content="新建" Width="60" Margin="5"/>
+                <Button Name="DeleteButton" Content="删除" Width="60" Margin="5"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Column 1: Editor and Actions -->
+        <Grid Grid.Column="1" Margin="10,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/> <!-- Profile Name -->
+                <RowDefinition Height="*"/>    <!-- Statement Block -->
+                <RowDefinition Height="Auto"/> <!-- Save Button -->
+                <RowDefinition Height="Auto"/> <!-- Launch With Profile Button -->
+                <RowDefinition Height="Auto"/> <!-- Separator -->
+                <RowDefinition Height="Auto"/> <!-- Settings Path Label -->
+                <RowDefinition Height="Auto"/> <!-- Settings Path Controls -->
+                <RowDefinition Height="Auto"/> <!-- Action Buttons -->
+                <RowDefinition Height="Auto"/> <!-- Hyperlink -->
+            </Grid.RowDefinitions>
+
+            <!-- Profile Editing Area -->
+            <Label Grid.Row="0" Content="配置名称:"/>
+            <TextBox Grid.Row="0" Name="ProfileNameTextBox" Margin="70,0,0,5" VerticalAlignment="Top" Height="25"/>
+
+            <Label Grid.Row="1" Content="PowerShell 语句块:" VerticalAlignment="Top"/>
+            <TextBox Grid.Row="1" Name="StatementBlockTextBox" Margin="0,28,0,10" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+            
+            <Button Grid.Row="2" Name="SaveButton" Content="保存配置" FontWeight="Bold" Margin="0,5,0,5"/>
+            <Button Grid.Row="3" Name="LaunchWithProfileButton" Content="根据配置文件启动Claude code" FontWeight="Bold" Margin="0,5,0,10"/>
+
+            <!-- Action Area -->
+            <Separator Grid.Row="4" Margin="0,5"/>
+            
+            <Label Grid.Row="5" Content="Claude code安装目录下的settings.json 路径:" />
+            <Grid Grid.Row="6" Margin="0,5,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Name="SettingsPathLabel" Grid.Column="0" Content="尚未选择文件..." VerticalContentAlignment="Center" Background="#EEE" BorderThickness="1" BorderBrush="#CCC"/>
+                <Button Name="BrowseSettingsButton" Grid.Column="1" Content="浏览..." Margin="5,0,0,0" Padding="10,2"/>
+            </Grid>
+            
+            <StackPanel Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+                <Button Name="ApplyButton" Content="应用到 settings.json" Margin="5"/>
+                <Button Name="ResetButton" Content="重置 settings.json" Margin="5"/>
+                <Button Name="LaunchDirectlyButton" Content="直接启动 Claude code" Margin="5"/>
+            </StackPanel>
+
+            <TextBlock Grid.Row="8" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,15,0,0">
+                <Run>by</Run>
+                <Hyperlink NavigateUri="https://space.bilibili.com/323413250" RequestNavigate="Hyperlink_RequestNavigate">
+                    风信子木南
+                </Hyperlink>
+            </TextBlock>
+        </Grid>
+    </Grid>
+</Window>
