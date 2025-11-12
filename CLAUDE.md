@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a C# WPF application called "LLMConfigManager" (Claude Code Model Switch Manager) that provides a graphical interface for managing Claude Code AI model configurations. The application allows users to create, edit, and apply different AI model profiles to Claude Code's settings.json file.
+This is a C# WPF application called "ClaudeCodeLLMConfigManager" (Claude Code Model Switch Manager) that provides a graphical interface for managing Claude Code AI model configurations. The application allows users to create, edit, and apply different AI model profiles to Claude Code's settings.json file.
 
 **Key Features:**
 - Profile management for different AI models (Gemini, Kimi, etc.)
@@ -37,12 +37,12 @@ The application follows a three-layer architecture pattern:
 
 ### Build the Project
 ```bash
-dotnet build LLMConfigManager.csproj
+dotnet build ClaudeCodeLLMConfigManager.csproj
 ```
 
 ### Run the Application
 ```bash
-dotnet run --project LLMConfigManager.csproj
+dotnet run --project ClaudeCodeLLMConfigManager.csproj
 ```
 
 ### Build for Release

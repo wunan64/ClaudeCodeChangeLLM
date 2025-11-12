@@ -1,6 +1,6 @@
 using System.Windows;
 
-namespace LLMConfigManager
+namespace ClaudeCodeLLMConfigManager
 {
     /// <summary>
     /// Interaction logic for App.xaml

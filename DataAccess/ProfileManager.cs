@@ -1,9 +1,9 @@
-using LLMConfigManager.Model;
+using ClaudeCodeLLMConfigManager.Model;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
 
-namespace LLMConfigManager.DataAccess
+namespace ClaudeCodeLLMConfigManager.DataAccess
 {
     public class ProfileManager
     {

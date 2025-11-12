@@ -1,4 +1,4 @@
-namespace LLMConfigManager.Model
+namespace ClaudeCodeLLMConfigManager.Model
 {
     public class ModelProfile
     {

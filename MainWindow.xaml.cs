@@ -1,6 +1,6 @@
- using LLMConfigManager.DataAccess;
- using LLMConfigManager.BusinessLogic;
- using LLMConfigManager.Model;
+ using ClaudeCodeLLMConfigManager.DataAccess;
+ using ClaudeCodeLLMConfigManager.BusinessLogic;
+ using ClaudeCodeLLMConfigManager.Model;
  using Microsoft.Win32;
  using System.Collections.Generic;
  using System.Diagnostics;
@@ -10,7 +10,7 @@
  using System.Windows.Controls;
  using System.Windows.Navigation;
  
- namespace LLMConfigManager
+ namespace ClaudeCodeLLMConfigManager
  {
      /// <summary>
      /// Interaction logic for MainWindow.xaml
@@ -24,7 +24,7 @@
  
          public MainWindow()
          {
-             InitializeComponent();
+            InitializeComponent();
  
              _profileManager = new ProfileManager();
              _settingsManager = new SettingsManager();
