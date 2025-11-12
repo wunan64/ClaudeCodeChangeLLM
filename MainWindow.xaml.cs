@@ -40,6 +40,8 @@
              LaunchWithProfileButton.Click += LaunchWithProfileButton_Click;
              LaunchDirectlyButton.Click += LaunchDirectlyButton_Click;
              ProfileListBox.SelectionChanged += ProfileListBox_SelectionChanged;
+
+            LoadProfiles();
          }
  
          private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)

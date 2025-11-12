@@ -2,7 +2,7 @@
   {
     "Name": "kimi",
     "StatementBlock": "$Env:ANTHROPIC_BASE_URL=\"https://api.moonshot.cn/anthropic\"
-$Env:ANTHROPIC_AUTH_TOKEN=\"your APIkey\"
+$Env:ANTHROPIC_AUTH_TOKEN=\"your key\"
 $Env:ANTHROPIC_MODEL = \"kimi-for-coding\"
 $Env:ANTHROPIC_DEFAULT_SONNET_MODEL = \"kimi-for-coding\""
   }
