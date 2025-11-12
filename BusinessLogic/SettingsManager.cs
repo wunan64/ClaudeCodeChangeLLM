@@ -80,11 +80,18 @@ namespace ClaudeCodeLLMConfigManager.BusinessLogic
             catch { return false; }
         }
 
-        public void LaunchClaudeWithProfile(ModelProfile profile)
+        public void LaunchClaudeWithProfile(ModelProfile profile, string workingPath = null)
         {
             if (profile == null) return;
-            var envVars = ParseStatementBlock(profile.StatementBlock);
             var commandParts = new List<string>();
+
+            // 如果指定了工作路径，先添加 cd 命令
+            if (!string.IsNullOrEmpty(workingPath))
+            {
+                commandParts.Add($"cd '{workingPath}'");
+            }
+
+            var envVars = ParseStatementBlock(profile.StatementBlock);
             foreach (var kvp in envVars)
             {
                 commandParts.Add($"$Env:{kvp.Key}='{kvp.Value}'");
@@ -94,9 +101,19 @@ namespace ClaudeCodeLLMConfigManager.BusinessLogic
             Process.Start("powershell.exe", $"-NoExit -Command \"{fullCommand}\" ");
         }
 
-        public void LaunchClaudeDirectly()
+        public void LaunchClaudeDirectly(string workingPath = null)
         {
-            Process.Start("powershell.exe", "-NoExit -Command \"claude\"");
+            var commandParts = new List<string>();
+
+            // 如果指定了工作路径，先添加 cd 命令
+            if (!string.IsNullOrEmpty(workingPath))
+            {
+                commandParts.Add($"cd '{workingPath}'");
+            }
+
+            commandParts.Add("claude");
+            var fullCommand = string.Join("; ", commandParts);
+            Process.Start("powershell.exe", $"-NoExit -Command \"{fullCommand}\" ");
         }
     }
 }

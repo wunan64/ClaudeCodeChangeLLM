@@ -2,6 +2,8 @@
  using ClaudeCodeLLMConfigManager.BusinessLogic;
  using ClaudeCodeLLMConfigManager.Model;
  using Microsoft.Win32;
+ using Newtonsoft.Json;
+ using Newtonsoft.Json.Linq;
  using System.Collections.Generic;
  using System.Diagnostics;
  using System.IO;
@@ -21,6 +23,7 @@
          private readonly SettingsManager _settingsManager;
          private List<ModelProfile> _profiles;
          private string _settingsJsonPath;
+         private string _workingPath;
  
          public MainWindow()
          {
@@ -35,6 +38,7 @@
              DeleteButton.Click += DeleteButton_Click;
              SaveButton.Click += SaveButton_Click;
              BrowseSettingsButton.Click += BrowseSettingsButton_Click;
+             BrowseWorkingPathButton.Click += BrowseWorkingPathButton_Click;
              ApplyButton.Click += ApplyButton_Click;
              ResetButton.Click += ResetButton_Click;
              LaunchWithProfileButton.Click += LaunchWithProfileButton_Click;
@@ -42,6 +46,7 @@
              ProfileListBox.SelectionChanged += ProfileListBox_SelectionChanged;
 
             LoadProfiles();
+            LoadAppSettings();
          }
  
          private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
@@ -169,12 +174,61 @@
              var selectedName = ProfileListBox.SelectedItem.ToString();
              var selectedProfile = _profiles.FirstOrDefault(p => p.Name == selectedName);
              if (selectedProfile == null) return;
-             _settingsManager.LaunchClaudeWithProfile(selectedProfile);
+             _settingsManager.LaunchClaudeWithProfile(selectedProfile, _workingPath);
          }
  
          private void LaunchDirectlyButton_Click(object sender, RoutedEventArgs e)
          {
-             _settingsManager.LaunchClaudeDirectly();
+             _settingsManager.LaunchClaudeDirectly(_workingPath);
+         }
+
+         private void BrowseWorkingPathButton_Click(object sender, RoutedEventArgs e)
+         {
+             using (var folderDialog = new System.Windows.Forms.FolderBrowserDialog())
+             {
+                 folderDialog.Description = "选择Claude Code的工作目录";
+                 folderDialog.ShowNewFolderButton = true;
+
+                 if (folderDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                 {
+                     _workingPath = folderDialog.SelectedPath;
+                     WorkingPathLabel.Content = _workingPath;
+                     SaveAppSettings();
+                 }
+             }
+         }
+
+         private void LoadAppSettings()
+         {
+             try
+             {
+                 if (File.Exists("appsettings.json"))
+                 {
+                     var json = File.ReadAllText("appsettings.json");
+                     var settings = JObject.Parse(json);
+                     _workingPath = settings["workingPath"]?.ToString();
+                     if (!string.IsNullOrEmpty(_workingPath))
+                     {
+                         WorkingPathLabel.Content = _workingPath;
+                     }
+                 }
+             }
+             catch { /* 忽略加载错误，使用默认值 */ }
+         }
+
+         private void SaveAppSettings()
+         {
+             try
+             {
+                 var settings = new JObject();
+                 if (!string.IsNullOrEmpty(_workingPath))
+                 {
+                     settings["workingPath"] = _workingPath;
+                 }
+
+                 File.WriteAllText("appsettings.json", settings.ToString(Formatting.Indented));
+             }
+             catch { /* 忽略保存错误 */ }
          }
      }
  }

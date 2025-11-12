@@ -29,6 +29,8 @@
         <!-- Column 1: Editor and Actions -->
         <Grid Grid.Column="1" Margin="10,0,0,0">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/> <!-- Working Path Label -->
+                <RowDefinition Height="Auto"/> <!-- Working Path Controls -->
                 <RowDefinition Height="Auto"/> <!-- Profile Name -->
                 <RowDefinition Height="*"/>    <!-- Statement Block -->
                 <RowDefinition Height="Auto"/> <!-- Save Button -->
@@ -40,21 +42,35 @@
                 <RowDefinition Height="Auto"/> <!-- Hyperlink -->
             </Grid.RowDefinitions>
 
-            <!-- Profile Editing Area -->
-            <Label Grid.Row="0" Content="配置名称:"/>
-            <TextBox Grid.Row="0" Name="ProfileNameTextBox" Margin="70,0,0,5" VerticalAlignment="Top" Height="25"/>
+            <!-- Working Path Selection -->
+            <Label Grid.Row="0" Content="工作路径:"/>
+            <Grid Grid.Row="1" Margin="70,0,0,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Name="WorkingPathLabel" Grid.Column="0" Content="未选择工作路径..."
+                       VerticalContentAlignment="Center" Background="#EEE"
+                       BorderThickness="1" BorderBrush="#CCC"/>
+                <Button Name="BrowseWorkingPathButton" Grid.Column="1"
+                        Content="选择路径..." Margin="5,0,0,0" Padding="10,2"/>
+            </Grid>
 
-            <Label Grid.Row="1" Content="PowerShell 语句块:" VerticalAlignment="Top"/>
-            <TextBox Grid.Row="1" Name="StatementBlockTextBox" Margin="0,28,0,10" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
-            
-            <Button Grid.Row="2" Name="SaveButton" Content="保存配置" FontWeight="Bold" Margin="0,5,0,5"/>
-            <Button Grid.Row="3" Name="LaunchWithProfileButton" Content="根据配置文件启动Claude code" FontWeight="Bold" Margin="0,5,0,10"/>
+            <!-- Profile Editing Area -->
+            <Label Grid.Row="2" Content="配置名称:"/>
+            <TextBox Grid.Row="2" Name="ProfileNameTextBox" Margin="70,0,0,5" VerticalAlignment="Top" Height="25"/>
+
+            <Label Grid.Row="3" Content="PowerShell 语句块:" VerticalAlignment="Top"/>
+            <TextBox Grid.Row="3" Name="StatementBlockTextBox" Margin="0,28,0,10" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+
+            <Button Grid.Row="4" Name="SaveButton" Content="保存配置" FontWeight="Bold" Margin="0,5,0,5"/>
+            <Button Grid.Row="5" Name="LaunchWithProfileButton" Content="根据配置文件启动Claude code" FontWeight="Bold" Margin="0,5,0,10"/>
 
             <!-- Action Area -->
-            <Separator Grid.Row="4" Margin="0,5"/>
-            
-            <Label Grid.Row="5" Content="Claude code安装目录下的settings.json 路径:" />
-            <Grid Grid.Row="6" Margin="0,5,0,10">
+            <Separator Grid.Row="6" Margin="0,5"/>
+
+            <Label Grid.Row="7" Content="Claude code安装目录下的settings.json 路径:" />
+            <Grid Grid.Row="8" Margin="0,5,0,10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
@@ -62,14 +78,14 @@
                 <Label Name="SettingsPathLabel" Grid.Column="0" Content="尚未选择文件..." VerticalContentAlignment="Center" Background="#EEE" BorderThickness="1" BorderBrush="#CCC"/>
                 <Button Name="BrowseSettingsButton" Grid.Column="1" Content="浏览..." Margin="5,0,0,0" Padding="10,2"/>
             </Grid>
-            
-            <StackPanel Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+
+            <StackPanel Grid.Row="9" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
                 <Button Name="ApplyButton" Content="应用到 settings.json" Margin="5"/>
                 <Button Name="ResetButton" Content="重置 settings.json" Margin="5"/>
                 <Button Name="LaunchDirectlyButton" Content="直接启动 Claude code" Margin="5"/>
             </StackPanel>
 
-            <TextBlock Grid.Row="8" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,15,0,0">
+            <TextBlock Grid.Row="10" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,15,0,0">
                 <Run>by</Run>
                 <Hyperlink NavigateUri="https://space.bilibili.com/323413250" RequestNavigate="Hyperlink_RequestNavigate">
                     风信子木南
